@@ -5,11 +5,6 @@
 *
 * Adds methods for chaining common database queries.
 *
-* This model extension adds a set of literate methods for querying the database
-* via the Active Record Pattern built in Codeigniter. Also, it automatically
-* converts unexisting methods into where clauses, significantly reducing the amount
-* of redundant code in your models, if you use scoping.
-*
 * NOTICE OF LICENSE
 *
 * Licensed under the Creative Commons Attribution 3.0 Unported License.
