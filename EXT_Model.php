@@ -173,7 +173,7 @@ class EXT_Model extends CI_Model {
 		->select($field)
 		->where($field, $value);
 		
-		$sql = $this->cdb->get('users');
+		$sql = $this->cdb->get($this->_table);
 		
 		if ($sql->num_rows() > 0) {
 			return TRUE;
