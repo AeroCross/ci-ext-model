@@ -24,7 +24,7 @@
 class EXT_Model extends CI_Model {
 
 	// the database group name to load
-	private $database;
+	private $database = 'DATABASE_GROUP';
 
 	/**
 	* The class constructor.
