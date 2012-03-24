@@ -21,18 +21,24 @@ To set up, is pretty straightforward.
 
 If using the default values, you code should be something like this:
 
-``php
+```php
 <?php
 
 class Model extends EXT_Model {
 	// code in here
 }
 ?>
-``
+```
 
-You would load the model as you usually do: `$this->load->model('model'); ?>`. In your models, __define a $_table property with the name of the table__ so the methods can auto-load the table.
+You would load the model as you usually do: 
 
-You _should_ use `$this->cdb->method()` if you're overriding the methods so you can use other database connections without issues. If you're using the default one, you can just use $this->db (replace $cdb with $db).
+```php
+	$this->load->model('model');
+```
+
+In your models, __define a `$_table` property with the name of the table__ so the methods can auto-load the table.
+
+You _should_ use `$this->cdb->method()` if you're overriding the methods so you can use other database connections without issues. If you're using the default one, you can just use `$this->db` (replace `$cdb` with `$db`).
 
 ## Usage
 
@@ -61,7 +67,10 @@ The `data()` method is used to fetch information from the databases. You'll pass
 
 If we're using a model named _user_ and the table (`$this->_table`)is called _users_, we would just do:
 
+```php
+
 	$this->user->data('firstname, lastname, email, password')->getAll();
+```
 
 This will select all the first names, last names, emails, and passwords of the users table, and return the result.
 
@@ -71,11 +80,15 @@ Using PHP magic methods, you can just pass a method with the column name and PHP
 
 Continuing the above example, if we want to select the same information, but where the username equals "Mario", we'll do:
 
+```
 	$this->user->data('firstname, lastname, email, password')->username('Mario')->get();
+```
 
 We use `get()` since it's just one result. This will generate:
 
+```sql
 	SELECT 'firstname, lastname, email, password' FROM `users` WHERE `username` = 'Mario';
+```
 
 And runs the query.
 
