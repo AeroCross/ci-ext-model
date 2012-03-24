@@ -2,6 +2,8 @@
 
 A simple core extension library for Codeigniter that allows simple and flexible database queries using Method Chaining.
 
+By __Mario Cuba__ <[mario@mariocuba.net][email]>
+
 ## License
 
 Released to the Public Domain under the [Creative Commons Attribution 3.0 Unported License][ccl].
@@ -175,6 +177,7 @@ If we add the limit (and optionally, the offset) clause:
 	SELECT `username`, `password` FROM `users` WHERE `role` = 'Admin' ORDER BY `id` DESC LIMIT 2, 0
 ```
 
+[email]: mailto:mario@mariocuba.net
 [ccl]: http://creativecommons.org/licenses/by/3.0
 [ci]: http://codeigniter.com
 [git-submodule]: http://chrisjean.com/2009/04/20/git-submodules-adding-using-removing-and-updating/
