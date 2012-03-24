@@ -68,7 +68,7 @@ You can also use `$this->fetch()` so you get the query object, _not the result_ 
 
 The `data()` method is used to fetch information from the databases. You'll pass a comma-separated string with the fields to fetch.
 
-If we're using a model named _user_ and the table (`$this->_table`)is called _users_, we would just do:
+If we're using a model named _user_ and the table (`$this->_table`) is called _users_, we would just do:
 
 ```php
 <?php
@@ -84,7 +84,7 @@ Using PHP magic methods, you can just pass a method with the column name and PHP
 
 Continuing the above example, if we want to select the same information, but where the username equals "Mario", we'll do:
 
-```
+```php
 <?php
 	$this->user->data('firstname, lastname, email, password')->username('Mario')->get();
 ?>
