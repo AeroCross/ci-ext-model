@@ -1,18 +1,3 @@
-# Codeigniter Core Model Extension
-
-A simple core extension library for Codeigniter that allows simple and flexible database queries using Method Chaining.
-
-By __Mario Cuba__ <[mario@mariocuba.net][email]>
-
-## License
-
-Released to the Public Domain under the [Creative Commons Attribution 3.0 Unported License][ccl].
-
-## Requirements
-
-- [Codeigniter 2.1][ci]
-- Active Record
-
 ## Setting up
 
 To set up, is pretty straightforward.
@@ -24,21 +9,15 @@ To set up, is pretty straightforward.
 If using the default values, you code should be something like this:
 
 ```php
-<?php
-
 class Model extends EXT_Model {
 	// code in here
 }
-
-?>
 ```
 
 You would load the model as you usually do: 
 
 ```php
-<?php
-	$this->load->model('model');
-?>
+$this->load->model('model');
 ```
 
 In your models, __define a `$_table` property with the name of the table__ so the methods can auto-load the table.
@@ -60,7 +39,7 @@ The extension comes with some default methods:
 - delete()
 - match()
 
-### Get data
+### Getting data
 
 The main methods are these two: `$this->get()` and `$this->getAll()` these are the equivalents of doing `row()` and `result()`. You will end each query with these.
 
@@ -73,9 +52,7 @@ The `data()` method is used to fetch information from the databases. You'll pass
 If we're using a model named _user_ and the table (`$this->_table`) is called _users_, we would just do:
 
 ```php
-<?php
-	$this->user->data('firstname, lastname, email, password')->getAll();
-?>
+$this->user->data('firstname, lastname, email, password')->getAll();
 ```
 
 This will select all the first names, last names, emails, and passwords of the users table, and return the result.
@@ -87,15 +64,13 @@ Using PHP magic methods, you can just pass a method with the column name and PHP
 Continuing the above example, if we want to select the same information, but where the username equals "Mario", we'll do:
 
 ```php
-<?php
-	$this->user->data('firstname, lastname, email, password')->username('Mario')->get();
-?>
+$this->user->data('firstname, lastname, email, password')->username('Mario')->get();
 ```
 
 We use `get()` since it's just one result. This will generate:
 
 ```sql
-	SELECT 'firstname, lastname, email, password' FROM `users` WHERE `username` = 'Mario';
+SELECT 'firstname, lastname, email, password' FROM `users` WHERE `username` = 'Mario';
 ```
 
 And runs the query.
@@ -103,15 +78,13 @@ And runs the query.
 You can _chain_ methods, too. If you want to select all the data, but only where there's a certain name and last name, you'd do:
 
 ```php
-<?php
-	$this->user->data()->firstname('Mario')->lastname('Cuba')->get();
-?>
+$this->user->data()->firstname('Mario')->lastname('Cuba')->get();
 ```
 
 This will generate:
 
 ```sql
-	SELECT '*' FROM `users` WHERE `firstname` = 'Mario' AND `lastname` = 'Cuba';
+SELECT '*' FROM `users` WHERE `firstname` = 'Mario' AND `lastname` = 'Cuba';
 ```
 
 Note that the `firstname` and `lastname` methods __do not exist__ — they are created dynamically for flexibility. Those are __database columns names__.
@@ -121,10 +94,8 @@ Note that the `firstname` and `lastname` methods __do not exist__ — they are c
 The `match()` method is used to compare a given value with the database. The method will check if the value exists in a certain field, and return a boolean value (TRUE if it exists, FALSE otherwise).
 
 ```php
-<?php
-	$user = 'AeroCross';
-	$exists = $this->user->match($user, 'username'); // returns TRUE if the user 'AeroCross' exists in the users table
-?>
+$user = 'AeroCross';
+$exists = $this->user->match($user, 'username'); // returns TRUE if the user 'AeroCross' exists in the users table
 ```
 
 As simple as that.
@@ -136,16 +107,15 @@ The `insert()`, `update()` and `delete()` methods are auxiliary methods to make 
 Pass an asociative array containing the where clauses (field => value) and that's it.
 
 ```php
-<?php
-	$data = [	'username' 	=> 'AeroCross',
-				'password' 	=> '123',
-				'email' 	=> 'mario@mariocuba.net',
-				'firstname'	=> 'Mario',
-				'lastname'	=> 'Cuba'
-			]; // short array syntax in 5.4 FTW!
-	
-	$this->user->insert($data);
-?>
+// short array syntax in 5.4 FTW!
+$data = [	'username' 	=> 'AeroCross',
+			'password' 	=> '123',
+			'email' 	=> 'mario@mariocuba.net',
+			'firstname'	=> 'Mario',
+			'lastname'	=> 'Cuba'
+		];
+
+$this->user->insert($data);
 ```
 The same applies for the other methods.
 
@@ -154,27 +124,23 @@ The same applies for the other methods.
 The `by()` and `limit()` methods are using for filtering data.
 
 ```php
-<?php
-	$this->user->data('username, password')->role('Admin')->by('id', 'desc')->getAll();
-?>
+$this->user->data('username, password')->role('Admin')->by('id', 'desc')->getAll();
 ```
 
 Produces:
 
 ```sql
-	SELECT `username`, `password` FROM `users` WHERE `role` = 'Admin' ORDER BY `id` DESC
+SELECT `username`, `password` FROM `users` WHERE `role` = 'Admin' ORDER BY `id` DESC
 ```
 
 If we add the limit (and optionally, the offset) clause:
 
 ```php
-<?php
-	$this->user->data('username, password')->role('Admin')->limit(2, 0)->by('id', 'desc')->getAll();
-?>
+$this->user->data('username, password')->role('Admin')->limit(2, 0)->by('id', 'desc')->getAll();
 ```
 
 ```sql
-	SELECT `username`, `password` FROM `users` WHERE `role` = 'Admin' ORDER BY `id` DESC LIMIT 2, 0
+SELECT `username`, `password` FROM `users` WHERE `role` = 'Admin' ORDER BY `id` DESC LIMIT 2, 0
 ```
 
 [email]: mailto:mario@mariocuba.net
