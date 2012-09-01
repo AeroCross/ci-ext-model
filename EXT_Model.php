@@ -3,7 +3,7 @@
 /**
 * Codeigniter Core Model Extension
 *
-* Adds methods for chaining common database queries.
+* Adds methods for chaining and some common database queries.
 *
 * NOTICE OF LICENSE
 *
@@ -11,7 +11,7 @@
 *
 * This source file is subject to the Creative Commons Attribution 3.0 Unported License
 * that is available through http://creativecommons.org/licenses/by/3.0/legalcode. It is
-* released to the public domain via http://github.com/AeroCross/ci-core-extensions.
+* released to the public domain via http://github.com/AeroCross/ci-ext-model.
 *
 * You are free to share, modify, and profit from this source file as long as
 * there is attribution to the author and this Notice of License is not removed.
@@ -71,8 +71,12 @@ class EXT_Model extends CI_Model {
 	* @return	object	- the database object
 	* @access	public
 	*/
-	public function fetch() {
-		return $this->cdb->get($this->_table);
+	public function fetch($table = NULL) {
+		if (!empty($table)) {
+			return $this->cdb->get($table);
+		} else {
+			return $this->cdb->get($this->_table);
+		}
 	}
 
 	/**
@@ -81,8 +85,12 @@ class EXT_Model extends CI_Model {
 	* @return	object	- the database object
 	* @access	public
 	*/
-	public function get() {
-		return $this->cdb->get($this->_table)->row();
+	public function get($table = NULL) {
+		if (!empty($table)) {
+			return $this->cdb->get($table)->row();
+		} else {
+			return $this->cdb->get($this->_table)->row();
+		}
 	}
 
 	/**
@@ -91,8 +99,12 @@ class EXT_Model extends CI_Model {
 	* @return	object	- the database object
 	* @access	public
 	*/
-	public function getAll() {
-		return $this->cdb->get($this->_table)->result();
+	public function getAll($table = NULL) {
+		if (!empty($table)) {
+			return $this->cdb->get($table)->result();
+		} else {
+			return $this->cdb->get($this->_table)->result();
+		}
 	}
 
 	/**
